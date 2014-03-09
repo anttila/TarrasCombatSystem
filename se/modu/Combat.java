@@ -5,18 +5,18 @@ import java.util.Scanner;
 public class Combat {
 	
 	private Random rand;
-	
+	private String combat, tenAgain;
+	private int baseDamage = -1;
+	private int dicePool = -1;
+	private int difficulty = -1;
+	private int success = 0;
+	private Scanner in;
 	public Combat(){
+		in = new Scanner(System.in);
 		rand = new Random();
 	}
 	
-	public void run(){
-		String combat, tenAgain;
-		int baseDamage = -1;
-		int dicePool = -1;
-		int difficulty = -1;
-		int success = 0;
-		Scanner in = new Scanner(System.in);
+	public void setup(){
 		System.out.print("Combat (Y) or Non-combat (N)? ");
 		combat = in.next();
 		if(combat.equals("Y") || combat.equals("y")){
@@ -29,7 +29,14 @@ public class Combat {
 		dicePool = in.nextInt();
 		System.out.print("Difficulty ");
 		difficulty = in.nextInt();
-		in.close();
+	}
+	
+	public void run(){
+		if(difficulty < 0){
+			System.out.println("Either setup hasn't run, or difficulty is invalid");
+			return; // (should do more checks, but works for now)
+		}
+
 		// Input done, logic:
 		success = successRolls(dicePool, difficulty, (tenAgain.equals("Y")||tenAgain.equals("y") ));
 		
@@ -56,6 +63,12 @@ public class Combat {
 				System.out.print("\nDamage successes: "+combatSuccess);
 			}
 			System.out.println();
+		}
+		System.out.print("Run again with same settings? ");
+		
+		String runAgain = in.next();
+		if(runAgain.equals("y") || runAgain.equals("Y")){
+			run();
 		}
 	}
 	
@@ -90,6 +103,8 @@ public class Combat {
 		return rand.nextInt(10)+1;
 	}
 	public static void main(String[] args) {
-		new Combat().run();
+		Combat combat = new Combat();
+		combat.setup();
+		combat.run();
 	}
 }

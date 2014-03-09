@@ -93,9 +93,12 @@ public class Combat {
 			}
 			System.out.println();
 		}
-		System.out.print("Run again with same settings? ");
-		
-		String runAgain = in.next();
+
+		String runAgain = "";		
+		while(!runAgain.equalsIgnoreCase("y") && !runAgain.equalsIgnoreCase("n")){
+			System.out.print("Run again with same settings? (Y/N) ");
+			runAgain = in.next();
+		}
 		if(runAgain.equalsIgnoreCase("y")){
 			run();
 		}

@@ -14,21 +14,50 @@ public class Combat {
 	public Combat(){
 		in = new Scanner(System.in);
 		rand = new Random();
+		combat = "";
+		tenAgain = "";
 	}
 	
 	public void setup(){
-		System.out.print("Combat (Y) or Non-combat (N)? ");
-		combat = in.next();
-		if(combat.equals("Y") || combat.equals("y")){
-			System.out.print("Base Weapon Damage (1-10) ");
-			baseDamage = in.nextInt();
+		while(!combat.equalsIgnoreCase("y") && !combat.equalsIgnoreCase("n")){
+			System.out.print("Combat (Y) or Non-combat (N)? ");
+			combat = in.next();
+			if(combat.equalsIgnoreCase("y")){
+				while(baseDamage < 1 || baseDamage > 10){
+					System.out.print("Base Weapon Damage (1-10) ");
+					if(in.hasNextInt()){
+						baseDamage = in.nextInt();
+					} else {
+						in.next();
+					}
+				}
+			}
 		}
-		System.out.print("Ten again? (Y/N) ");
-		tenAgain = in.next();
-		System.out.print("Base Dice Pool ");
-		dicePool = in.nextInt();
-		System.out.print("Difficulty ");
-		difficulty = in.nextInt();
+		
+		
+		while(!tenAgain.equalsIgnoreCase("y") && !tenAgain.equalsIgnoreCase("n")){
+			System.out.print("Ten again? (Y/N) ");
+			tenAgain = in.next();
+		}
+		
+		
+		while(dicePool < 1){
+			System.out.print("Base Dice Pool ");
+			if(in.hasNextInt()){
+				dicePool = in.nextInt();
+			} else {
+				in.next();
+			}
+		}
+		
+		while(difficulty <= 1 || difficulty > 11){
+			System.out.print("Difficulty (1-11): ");
+			if(in.hasNextInt()){
+				difficulty = in.nextInt();
+			} else {
+				in.next();
+			}
+		}
 	}
 	
 	public void run(){

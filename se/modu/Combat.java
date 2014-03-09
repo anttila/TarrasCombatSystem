@@ -67,7 +67,7 @@ public class Combat {
 		}
 
 		// Input done, logic:
-		success = successRolls(dicePool, difficulty, (tenAgain.equals("Y")||tenAgain.equals("y") ));
+		success = successRolls(dicePool, difficulty, (tenAgain.equalsIgnoreCase("y") ));
 		
 		// Output
 		System.out.println();
@@ -77,7 +77,7 @@ public class Combat {
 			System.out.println("Action botched");
 		} else if (success >= 1){
 			System.out.print("Number of successes: "+success);
-			if(combat.equals("y") || combat.equals("Y")){
+			if(combat.equalsIgnoreCase("y")){
 				System.out.println();
 				System.out.print("Damage dice rolled: ");
 				int combatSuccess = 0;
@@ -96,7 +96,7 @@ public class Combat {
 		System.out.print("Run again with same settings? ");
 		
 		String runAgain = in.next();
-		if(runAgain.equals("y") || runAgain.equals("Y")){
+		if(runAgain.equalsIgnoreCase("y")){
 			run();
 		}
 	}

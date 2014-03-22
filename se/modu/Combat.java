@@ -95,11 +95,16 @@ public class Combat {
 		}
 
 		String runAgain = "";		
-		while(!runAgain.equalsIgnoreCase("y") && !runAgain.equalsIgnoreCase("n")){
-			System.out.print("Run again with same settings? (Y/N) ");
+		while(!runAgain.equalsIgnoreCase("y") && !runAgain.equalsIgnoreCase("n") && !runAgain.equalsIgnoreCase("d")){
+			System.out.print("Run again with same settings? (Y/N/D) (D = Different data)");
 			runAgain = in.next();
 		}
 		if(runAgain.equalsIgnoreCase("y")){
+			run();
+		} else if(runAgain.equalsIgnoreCase("d")){
+			System.out.println();
+			reset();
+			setup();
 			run();
 		}
 	}
@@ -130,7 +135,14 @@ public class Combat {
 		System.out.println();
 		return success;
 	}
-	
+	private void reset(){
+		combat = "";
+		tenAgain = "";
+		baseDamage = -1;
+		dicePool = -1;
+		difficulty = -1;
+		success = 0;
+	}
 	private int rollD10(){
 		return rand.nextInt(10)+1;
 	}
